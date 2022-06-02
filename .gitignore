@@ -1,129 +1,714 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+# -*- coding: utf-8 -*-
 
-# C extensions
-*.so
+from time import ctime as t
+import pandas as pd
+sea_food={'Real Maine lobster':4.5, 'Swordfish steak': 3.00, 'Salmon':3.75, 'Blue crab': 3.25, 'Gravadlax': 3.5, 'Fried catfish': 3.00, 'Shrimp Po\'Boy':4.0, 'Snakehead fish':3.5, 'Asian carp':4.5}
+soups={'Cream Soup':1.65, 'Puree Soup':1.50,'Bisque':1.50, 'Chowder Soup': 2.00, 'Veloute Soup':1.75}
+rice={'Mansaf':3.00, 'Mandi':2.0, 'Ozi':2.00, 'Kabseh':2.00, 'White rice':1.75}
+departments={'sause':['ketchup', 'mionaze', 'garlic sause']
+             ,'salts':['fruit salt', 'normal salt', 'tona salt'],
+             'breakfast':['fried egg', 'coffee', 'donut', 'croissant', 'pancake', 'toast', 'bread', 'orange juice'],
+             'meals':['shawerma', 'italy', 'french', 'brousted', 'burger'],
+             'sandwitches':['shawerma', 'burger', 'mexico', 'fajeta'],
+             'beverages':['pepsi', 'sprit', 'fanta', 'pepsi dite'],
+             'family_meals':['3 persons meal', '6 persons meal', '10 persons meal'],
+             'snacks':['wedgs potatos', 'potatos', 'onion circles', 'modzarella fingers', 'yoghurt'],
+             'sea_food':['Real Maine lobster', 'Swordfish steak', 'Salmon', 'Blue crab', 'Gravadlax', 'Fried catfish', 'Shrimp Po\'Boy', 'Snakehead fish', 'Asian crap'],
+             'soups':['Cream Soup', 'Puree Soup', 'Bisque', 'Chowder Soup', 'Veloute Soup'],
+             'rice':['Mansaf', 'Mandi', 'Ozi', 'Kabseh', 'White rice']}
+salts={'fruit salt':1.25, 'normal salt':0.75, 'tona salt':1.15}
+sause={'ketchup':0.10, 'mionaze':0.25, 'garlic sause':0.35}
+snacks={'wedgs potatos': 1.00, 'potatos': 0.85, 'onion circles':0.25, 'modzarella fingeers':0.80, 'yoghurt':0.5}
+family_meals={'3 persons meal': 5.5, '6 persons meal':9.5, '10 persons meal': 15}
+basket={'item':[], 'amount':[], 'unit price':[], 'total price':[]}
+beverages={'pepsi':0.30,'sprite':0.3,'fanta':0.3, 'pepsi dite':0.35}
+breakfast={'fried egg':0.75 ,'coffee':0.60, 'donut':0.50, 'croissant':0.65, 'pancake':1.25, 'toast':0.35, 'bread':0.25, 'orange juice':1.00}
+sandwitches={'shawerma':0.6, 'burger':0.75, 'mexico':1.0, 'fajeta':1.25}
+meals={'shawerma':1.50, 'italy':2.0, 'french':2.0, 'brousted':2.75}
+new_products={}
+information={'email':[], 'passward':[], 'Phone Number':[], 'C/E':[], 'address':[]}
+finv={'id':[], 'item':[], 'amount':[], 'unit price':[],'total price':[]}
+invoice={'inv_id':[0], 'time':[], 'total':[]}
+resturant={'notes':[]}
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+class Registeration:
+    def __init__(self, username):
+        self.username = username
+    def register(self):
+        
+            user=input('please enter your email address to sign up or E / Exit:')
+            if user.lower()=='e':
+                return 0
+            print('you have only 3 tries')
+            for i in range (1,4):
+                
+                pass1=input('enter you passward:')
+                pass2=input('enter you passward again')
+                if pass1==pass2:
+                        print('welcome {}'.format(user))
+                        number=input('enter your number')
+                        address=input('enter your address')
+                        information['passward'].append(pass1)
+                        information['email'].append(user)
+                        information['Phone Number'].append(number)
+                        information['address'].append(address)
+                        break
+                else: 
+                    print('wrong passward ,try again')
+                    
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+    def log_in(self):
+        email=input('enter your email address to LOGIN or E/Exit:')
+        if email.lower()=='e':
+            return 0
+        passward=input('enter your passward:')
+        ind=information['email'].index(email)
+        while True :
+            if information['passward'][ind]==passward:
+                print ('Welcome {}'.format(email))
+                
+            else:
+                print('wrong enteration!!')
+                print('try again later')
+                break
+            break
+      
+        
+class Customer:
+    def __init__(self):
+        self
+    def meals(self):
+        print(pd.DataFrame([meals]))
+        while True:
+            pic=input('choose from the following meals/e for exit')
+            if pic.lower() in meals.keys():
+                size=str(input('enter size you want r/regular, m/medium, l/large'))
+                if size.lower()=='m':
+                    basket['unit price'].append(meals[pic]+0.35)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(meals[pic]+0.35)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='l':
+                    basket['unit price'].append(meals[pic]+0.75)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(meals[pic]+0.75)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='r': 
+                    basket['unit price'].append(meals[pic])
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*meals[pic]
+                    basket['total price'].append(total_amount)
+                
+                else:
+                    print('wrong enteration')
+                    continue
+                basket['item'].append(pic)
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
+            elif pic.lower()=='e':
+                print('thx for join us')
+                break
+            else:
+                print('wrong enteration')
+                break
+    def sandwitches(self):
+        print(pd.DataFrame([sandwitches]))
+        while True:
+            pic=input('choose from the following sandwitches/e for exit')
+            if pic.lower() in sandwitches.keys():
+                size=str(input('enter size you want r/regular, m/medium, l/large'))
+                if size.lower()=='m':
+                    basket['unit price'].append(sandwitches[pic]+0.3)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(sandwitches[pic]+0.3)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='l':
+                    basket['unit price'].append(sandwitches[pic]+0.6)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(sandwitches[pic]+0.6)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='r': 
+                    basket['unit price'].append(sandwitches[pic])
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*sandwitches[pic]
+                    basket['total price'].append(total_amount)
+                else:
+                    print('wrong enteration')
+                    continue
+                basket['item'].append(pic)
 
-# Translations
-*.mo
-*.pot
+            elif pic.lower()=='e':
+                print('thx for join us')
+                break
+            else:
+                print('wrong enteration')
+                
+                break
+                
+    def beverages(self):
+        print(pd.DataFrame([beverages]))
+        while True:
+            pic=input('choose from the following beverages/e for exit')
+            if pic.lower() in beverages.keys():
+                size=str(input('enter size you want r/regular, m/medium, l/large'))
+                if size.lower()=='m':
+                    basket['unit price'].append(beverages[pic]+0.20)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(beverages[pic]+0.20)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='l':
+                    basket['unit price'].append(beverages[pic]+0.35)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(beverages[pic]+0.35)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='r': 
+                    basket['unit price'].append(beverages[pic])
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*beverages[pic]
+                    basket['total price'].append(total_amount)
+                else:
+                    print('wrong enteration')
+                    continue
+                basket['item'].append(pic)
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+            elif pic.lower()=='e':
+                print('thx for join us')
+                break
+            else:
+                print('wrong enteration')
+                break
+    def salts(self):
+        print(pd.DataFrame([salts]))
+        while True:
+            pic=input('choose from the following salts/e for exit')
+            if pic.lower() in salts.keys():
+                size=str(input('enter size you want r/regular, m/medium, l/large'))
+                if size.lower()=='m':
+                    basket['unit price'].append(salts[pic]+0.35)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(salts[pic]+0.35)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='l':
+                    basket['unit price'].append(salts[pic]+0.75)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(salts[pic]+0.75)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='r': 
+                    basket['unit price'].append(salts[pic])
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*salts[pic]
+                    basket['total price'].append(total_amount)
+                else:
+                    print('wrong enteration')
+                    continue
+                basket['item'].append(pic)
 
-# Flask stuff:
-instance/
-.webassets-cache
+            elif pic.lower()=='e':
+                print('thx for join us')
+                break
+            else:
+                print('wrong enteration')
+                break
+    def sause(self):
+        print(pd.DataFrame([sause]))
+        while True:
+            pic=input('choose from the following beverages/e for exit')
+            if pic.lower() in sause.keys():
+                size=str(input('enter size you want r/regular, m/medium, l/large'))
+                if size.lower()=='m':
+                    basket['unit price'].append(sause[pic]+0.20)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(sause[pic]+0.20)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='l':
+                    basket['unit price'].append(sause[pic]+0.35)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(sause[pic]+0.35)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='r': 
+                    basket['unit price'].append(sause[pic])
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*sause[pic]
+                    basket['total price'].append(total_amount)
+                else:
+                    print('wrong enteration')
+                    continue
+                basket['item'].append(pic)
 
-# Scrapy stuff:
-.scrapy
+            elif pic.lower()=='e':
+                print('thx for join us')
+                break
+            else:
+                print('wrong enteration')
+                break
+    def family_meals(self):
+        print('you will got 1 leter pepsi for each meal')
+        print(pd.DataFrame([family_meals]))
+        while True:
+            pic=input('choose from the following meals/e for exit')
+            if pic.lower() in family_meals.keys():
+                basket['item'].append(pic)
+                basket['unit price'].append(family_meals[pic])
+                am=int(input('enter amount you want'))
+                basket['amount'].append(am)
+                total_amount=am*family_meals[pic]
+                basket['total price'].append(total_amount)
+            elif pic.lower()=='e':
+                print('thx for join us')
+                break
+            else:
+                print('wrong enteration')
+                continue
+    def snacks(self):
+        print(pd.DataFrame([snacks]))
+        while True:
+            pic=input('choose from the following snacks/e for exit')
+            if pic.lower() in snacks.keys():
+                size=str(input('enter size you want r/regular, m/medium, l/large'))
+                if size.lower()=='m':
+                    basket['unit price'].append(snacks[pic]+0.35)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(snacks[pic]+0.35)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='l':
+                    basket['unit price'].append(snacks[pic]+0.65)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(snacks[pic]+0.65)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='r': 
+                    basket['unit price'].append(snacks[pic])
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*snacks[pic]
+                    basket['total price'].append(total_amount)
+                else:
+                    print('wrong enteration')
+                    continue
+                basket['item'].append(pic)
 
-# Sphinx documentation
-docs/_build/
+            elif pic.lower()=='e':
+                print('thx for join us')
+                break
+            else:
+                print('wrong enteration')
+                break 
+    def breakfast(self):
+        print(pd.DataFrame([breakfast]))
+        while True:
+            pic=input('choose from the breakfast department/e for exit')
+            if pic.lower() in breakfast.keys():
+            
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*breakfast[pic]
+                    basket['total price'].append(total_amount)
+                
 
-# PyBuilder
-target/
+            elif pic.lower()=='e':
+                print('thx for join us')
+                break
+            else:
+                print('wrong enteration, try again')
+                continue                     
+    def newproducts(self):
+        print(pd.DataFrame([new_products]))
+        while True:
+            pic=input('choose from the following items/e for exit')
+            if pic.lower() in new_products.keys():
+                size=str(input('enter size you want r/regular, m/medium, l/large'))
+                if size.lower()=='m':
+                    basket['unit price'].append(new_products[pic]+0.35)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(new_products[pic]+0.35)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='l':
+                    basket['unit price'].append(new_products[pic]+0.65)
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*(new_products[pic]+0.65)
+                    basket['total price'].append(total_amount)
+                elif size.lower()=='r': 
+                    basket['unit price'].append(new_products[pic])
+                    am=int(input('enter amount you want'))
+                    basket['amount'].append(am)
+                    total_amount=am*new_products[pic]
+                    basket['total price'].append(total_amount)
+                else:
+                    print('wrong enteration')
+                    continue
+                basket['item'].append(pic)
 
-# Jupyter Notebook
-.ipynb_checkpoints
+            elif pic.lower()=='e':
+                print('thx for join us')
+                break
+            else:
+                print('wrong enteration')
+                break         
+    def notes(self):
+        #if u have any note to become better market wrote it below
+        notes=input('if you have any notes write it below: \n')
+        with open('readme.txt', 'w') as f:
+            f.write(notes)
+            print('Thank you for join us')
+            resturant['notes'].append(notes)
 
-# IPython
-profile_default/
-ipython_config.py
+    def show_bill(self):
+        import pandas as pd
+        basket1=pd.DataFrame(basket)
+        
+        print(basket1)
 
-# pyenv
-.python-version
+    def remove_item(self):
+        while True:
+            ch=str(input('enter item name: '))
+            if ch in basket['item']:
+                basket['item'].pop()
+                basket['amount'].pop()
+                basket['unit price'].pop()
+                basket['total price'].pop()
+                
+                break
+            else:
+                print('item not found, rewrite again')
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
+    def inv(self):
+        a=invoice['inv_id'][-1]+1
+        for i in range(0,len(basket['amount'])):
+            finv['id'].append(a)
+            finv['item'].append(basket['item'][i])
+            finv['amount'].append(basket['amount'][i])
+            finv['unit price'].append(basket['unit price'][i])
+            finv['total price'].append(basket['amount'][i]*basket['unit price'][i])
+            
+        time = t()
+        invoice['time'].append([time])
+        x=pd.DataFrame(finv)
+        print(x)
+        print('Thanks for join us ')
+  
+class employee:
+    def __init__(self, kst):
+        self.kst=kst
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
-__pypackages__/
+    def Creat_dep(self):
+        while True:
+            dep=input('enter department name to creat /e for exit')
+            if dep in departments.keys():
+                print('department already exist')
+            elif dep.lower()=='e':
+                break
+                
+            departments.update({dep:[]})
+            
+    def add_product(self):
+         dep=input('For which department you want to add product')
+         if dep in departments.keys():
+             p_name=input('enter the product name you want to add: ')
+             if p_name in departments.keys():#if the product name exsists in the department printe(exsist)
+                 print ('product already exsist')
+             p_price=float(input('enter product price Format{9.99} JD: '))
+            
+             departments[dep].append(p_name)
+             new_products.update({p_name:p_price})
+             print('product added succesfully')
+    def edit(self):
+        ch=input('enter p to edit product  E exit: ')
+        while True:
+            print(departments.keys())
+            if ch.lower()=='p':
+                print('meals=', meals.items())
+                print('sandwitches=', sandwitches.items())
+                print('snacks=', snacks.items())
+                print('beverages=', beverages.items())
+                print('new products=', new_products.items())
+                print('breakfast=', breakfast.items())
+                print('family meals=', family_meals.items())
+                x=input('''from which dep you want to edit
+                        1- meals: 
+                        2- sandwitches:  
+                        3- beverage: 
+                        4- new_products:
+                        5- snacks:
+                        6- family meals:
+                        7- breakfast:
+                        8- sause:
+                        9- sea food:
+                        10- salts: 
+                        11- rice:
+                        12- soup:
+                        e- exit: ''')
+                if x.lower()=='1':
+                    p_name=input('enter product name: ')
+                    if p_name in meals:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        meals[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='2':
+                     p_name=input('enter product name: ')
+                     if p_name in sandwitches:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        sandwitches[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='5':
+                    p_name=input('enter product name: ')
+                    if p_name in snacks:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        snacks[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='4':
+                    p_name=input('enter product name: ')
+                    if p_name in new_products:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        new_products[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='3':
+                    p_name=input('enter product name: ')
+                    if p_name in beverages:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        beverages[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='6':
+                    p_name=input('enter product name: ')
+                    if p_name in family_meals:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        family_meals[p_name]=n_price
+                        print('succesfully done')  
+                elif x.lower()=='7':
+                    p_name=input('enter product name')
+                    if p_name in breakfast:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        breakfast[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='8':
+                    p_name=input('enter product name')
+                    if p_name in sause:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        sause[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='9':
+                    p_name=input('enter product name')
+                    if p_name in sea_food:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        sea_food[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='10':
+                    p_name=input('enter product name')
+                    if p_name in salts:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        salts[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='11':
+                    p_name=input('enter product name')
+                    if p_name in rice:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        rice[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='12':
+                    p_name=input('enter product name')
+                    if p_name in soups:
+                        n_price=float(input('enter new price Format {9.99} JD or E'))
+                        soups[p_name]=n_price
+                        print('succesfully done')
+                elif x.lower()=='e':
+                    break
+                else:
+                    print('wrong enteration')
+                    break
+                break
+            elif ch.lower()=='e':
+                print('exit...')
+                break
+            break
+    def show_customers_informations(self):
+        
+                
+        a=pd.DataFrame(information)
+        print(a)
 
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
+    
+    
+def main():
+    kh=Registeration('khaled')
+    r=input('''choose form the following numbers:
+            1-SIGN UP: 
+            2-LOGIN: 
+            3-EXIT: ''')     
+    while True:
+        if r=='1':
+            kh.register()
+            kh.log_in()
+            manage1()
+        elif r=='2':
+            kh.log_in()
+            manage1()
+            print(f'Welcome {email}')
+        elif r=='3':
+            break
+        break
+        
+           
 
-# SageMath parsed files
-*.sage.py
+def manage1():
+    while True:
+        c=input('''Are you
+                1-CUSTOMER
+                2-EMPLOYEE
+                3-EXIT''')
+        if c.lower()=='1':
+            al=Customer()
+            information['C/E'].append('customer')
+            while True:
+                cho=input('''choose from the following numbers: 
+                          1- meals: 
+                          2- sandwitches:
+                          3- snacks:
+                          4- new_products:
+                          5- family meals:
+                          6- salts:
+                          7- sause:
+                          8- beverages:
+                          9- breakfast:
+                          10- show bill / remove items:
+                          11- invoice:
+                          12- add notes
+                          e- exit''')
+                if cho=='1':
+                    
+                    print('''The mentioned price is for regular meal\n
+                          for medium size you have to pay the regular meal price + 0.35 \n
+                          for large size you have to pay the regular meal price + 0.75''')
+                    
+                    al.meals()
+                elif cho=='2':
+                    
+                    print(''' The mentioned price is for regular meal\n
+                              for medium size you have to pay the regular meal price + 0.30 \n
+                              for large size you have to pay the regular meal price + 0.60''')
+                    al.sandwitches()
+                elif cho=='3':
+                    
+                    print('''The mentioned price is for regular meal\n
+                          for medium size you have to pay the regular meal price + 0.35 \n
+                          for large size you have to pay the regular meal price + 0.65''')                    
+                    al.snacks()
+                elif cho=='4':
+                    
+                    print('''The mentioned price is for regular meal\n
+                          for medium size you have to pay the regular meal price + 0.35 \n
+                          for large size you have to pay the regular meal price + 0.65''')                    
+                    al.newproducts()
+                elif cho=='5':
+                    
+                    al.family_meals()
+                elif cho=='6':
+                          
+                    print('''The mentioned price is for regular meal\n
+                          for medium size you have to pay the regular meal price + 0.35 \n
+                          for large size you have to pay the regular meal price + 0.75''')
+                    al.salts()
+                elif cho=='7':
+                         
+                    print('''The mentioned price is for regular meal\n
+                          for medium size you have to pay the regular meal price + 0.20 \n
+                          for large size you have to pay the regular meal price + 0.35''')
+                    al.sause()
+                elif cho=='8':
+                    
+                    al.beverages()
+                elif cho=='9':
+                   
+                    al.breakfast()                    
+                elif cho=='10':
+                    al.show_bill()
+                    ch=input('Do you want to remove item? Y/N')
+                    if ch.upper()=='Y':
+                        al.remove_item()
+                    else:
+                        continue
+                elif cho=='11':
+                    al.inv()
+                elif cho=='12':
+                    al.notes()
+                elif cho.lower()=='e':
+                    break
+                    
+                
+                else:
+                    print('wrong enteration')
+                    continue
+                
+        elif c.lower()=='2':
+            for i in range (1,4):
+                pa=input('enter employees passward, you have only 3 tries or e/for exit')
+                if pa=='KST':
+                    information['C/E'].append('employee')
+                    print('WELCOME ')
+                    j=employee('kst')
+                    while True:
+                        cho=input('''choose from the following numbers: 
+                                  1- creat department: 
+                                  2- add products:
+                                  3- edit price:
+                                  4- for show customer informations
+                                  5- for show items
+                                  e-exit
+                                  ''')
+                        if cho=='1':
+                            j.Creat_dep()
+                        elif cho=='2':
+                            j.add_product()
+                        elif cho=='3':
+                            j.edit()
+                        elif cho.lower()=='4':
+                            j.show_customers_informations()
+                        elif cho.lower()=='e':
+                            break
+                        elif cho.lower()=='5':
+                            j.items()
+                        else:
+                            print('wrong enteration')
+                            break 
+                elif pa=='e':
+                    break
+                else:
+                    print('wrong passward')
+        elif c.lower()=='3':
+            kh=Registeration('khaled')
+            a=input('s/sign up or l/login e/exit')
+            if a.lower()=='s':
+                kh.register()
+            elif a.lower()=='l':
+                kh.log_in()
+            elif a.lower()=='e':
+                break
+            
+            
+            
+        else:
+            print('wrong enteration')
+            
+        
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+    
+        
 
-# Spyder project settings
-.spyderproject
-.spyproject
+main()         
 
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
